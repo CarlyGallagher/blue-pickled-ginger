@@ -5,67 +5,98 @@ inquirer
 .prompt([
     {
         type: 'input',
-        name: 'project name',
+        name: 'title',
         message: 'What is the name of your project?',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'description',
         message: 'What was the motivation for this program?',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'install',
         message: 'What are the steps to install this program?',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'Usage',
         message: 'How do we use this application?',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'credits',
         message: 'List creators of application here.',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
+    },
+    {
+        type: 'input',
+        name: 'badges',
+        message: 'What badges would you like displayed?',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
+    },
+    {
+        type: 'input',
+        name: 'features',
+        message: 'What future features do you plan to implement?',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'contributers',
         message: 'What are the rules for future contributers?',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'test',
         message: 'Type test instructions here.',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
-        name: 'Questions',
+        name: 'questions',
         message: 'leave an email for people to ask questions.',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
-        name: 'Questions',
+        name: 'questions',
         message: 'Leave your github for people to ask questions.',
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'liscense',
-        message: 'liscense here',
+        message: 'What License did you use?',
+        choies: ['the MIT License', 'The GPL License', 'apache License', 'GNU license', 'N/A', ] , 
+        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
 ])
-.then((data) => 
-fs.writeFile('README.md', devPage(data), (err) => {
-    err ? console.log(err): console.log('success')
-})
-);
+.then(({
+    title,
+    description,
+    install,
+    usage,
+    credits,
+    badges,
+    features,
+    contributers,
+    test,
+    questions,
+    license,
+}) => {
 
-const READMEmd = 
-`# ${data.name},
+const template = 
+`# ${title},
 
 ## Description
 
-${data.name},
+${description},
 
 ## Table of Contents 
 
@@ -81,37 +112,49 @@ ${data.name},
 
 ## Installation
 
-${data.name},
+${install},
 
 ## Usage
 
-${data.name},
+${usage},
 
 ## Credits
 
-${data.name},
+${credits},
 
 ## Badges
 
-${data.name},
+${badges},
 
 ## Features
 
-${data.name},
+${features},
 
 ## How to Contribute
 
-${data.name},
+${contributers},
 
 ## Tests
 
-${data.name},
+${test},
 
 ## Questions
 
-${data.name},
+${questions},
 
 ## License
 
-${data.name},
-`
+${license},`;
+
+createNewFile(title, template);
+
+});
+
+function createNewFile(fileName, template){
+    fs.writeFile(`./${fileName.toLowerCase().split(' ').join('')}.md`, template(data), (err)=>{
+        if(err){
+            console.log(err)
+        }
+        console.log('Your README has been generated')
+    })
+}
