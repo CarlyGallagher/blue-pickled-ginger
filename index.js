@@ -59,13 +59,13 @@ inquirer
     },
     {
         type: 'input',
-        name: 'questions',
+        name: 'questions1',
         message: 'leave an email for people to ask questions.',
         validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
-        name: 'questions',
+        name: 'questions2',
         message: 'Leave your github for people to ask questions.',
         validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
@@ -87,7 +87,8 @@ inquirer
     features,
     contributers,
     test,
-    questions,
+    questions1,
+    questions2,
     license,
 }) => {
 
@@ -140,7 +141,9 @@ ${test},
 
 ## Questions
 
-${questions},
+${questions1},
+${questions2},
+
 
 ## License
 
