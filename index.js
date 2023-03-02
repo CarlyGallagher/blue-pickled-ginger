@@ -7,88 +7,74 @@ inquirer
         type: 'input',
         name: 'title',
         message: 'What is the name of your project?',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'description',
-        message: 'What was the motivation for this program?',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
+        message: 'What is the description of this project?',
     },
     {
         type: 'input',
         name: 'install',
         message: 'What are the steps to install this program?',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'Usage',
         message: 'How do we use this application?',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'credits',
         message: 'List creators of application here.',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'badges',
         message: 'What badges would you like displayed?',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
-    },
-    {
-        type: 'input',
-        name: 'features',
-        message: 'What future features do you plan to implement?',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'contributers',
         message: 'What are the rules for future contributers?',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'test',
         message: 'Type test instructions here.',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
         name: 'email',
-        message: 'leave an email for people to ask questions.',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
+        message: 'Leave an email for people to ask questions.',
     },
     {
         type: 'input',
         name: 'github',
         message: 'Leave your github for people to ask questions.',
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
-        type: 'input',
-        name: 'liscense',
+        type: 'list',
+        name: 'license',
         message: 'What License did you use?',
-        choies: ['the MIT License', 'The GPL License', 'apache License', 'GNU license', 'N/A', ] , 
-        validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
+        choices: ['the MIT License', 'The GPL License', 'apache License', 'GNU license', 'N/A', ] , 
     },
 ])
 .then((data) =>
-fs.writeFile('created-readme.md', template(data), (err) => {
+fs.writeFile('README.md', template(data), (err) => {
     err ? console.log(err) : console.log('README was succesful!')
 })
 );
 
-const template = ({title, description, install, usage, credits, badges, features, contributers, test, github, email, license,}) =>
-`# ${title},
+const template = ({title, description, install, usage, credits, badges, contributers, test, github, email, license,}) =>
+`
+${badges}
+
+# ${title}
 
 ## Description
 
-${description},
+${description}
 
 ## Table of Contents 
 
@@ -104,40 +90,38 @@ ${description},
 
 ## Installation
 
-${install},
+${install}
 
 ## Usage
-
-${usage},
+How to Use this application:
+${usage}
 
 ## Credits
 
-${credits},
-
-## Badges
-
-${badges},
-
-## Features
-
-${features},
+${credits}
 
 ## How to Contribute
+For future contributers these are the guidelines:
 
-${contributers},
+${contributers}
 
 ## Tests
+How to test this project:
 
-${test},
+${test}
 
 ## Questions
 If you have any questions feel free to reach me at
-Github Username: ${github},
+Github Username: 
+- https://github.com/${github}
+
 or
-Email: ${email},
+
+Email me at: 
+- ${email}
 
 ## License
 
-${license},`;
+${license}`;
 
 
