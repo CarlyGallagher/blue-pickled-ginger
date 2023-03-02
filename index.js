@@ -77,22 +77,13 @@ inquirer
         validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
 ])
-.then(({
-    title,
-    description,
-    install,
-    usage,
-    credits,
-    badges,
-    features,
-    contributers,
-    test,
-    questions1,
-    questions2,
-    license,
-}) => {
+.then((data) =>
+fs.writeFile('README.md', template(data), (err) => {
+    err ? console.log(err) : console.log('README was succesful!')
+})
+);
 
-const template = 
+const template = ({title, description, install, usage, credits, badges, features, contributers, test, questions1, questions2, license,}) =>
 `# ${title},
 
 ## Description
@@ -149,15 +140,4 @@ ${questions2},
 
 ${license},`;
 
-createNewFile(title, template);
 
-});
-
-function createNewFile(fileName, template){
-    fs.writeFile(`./${fileName.toLowerCase().split(' ').join('')}.md`, template(data), (err)=>{
-        if(err){
-            console.log(err)
-        }
-        console.log('Your README has been generated')
-    })
-}
