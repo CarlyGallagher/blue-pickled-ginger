@@ -59,13 +59,13 @@ inquirer
     },
     {
         type: 'input',
-        name: 'questions1',
+        name: 'email',
         message: 'leave an email for people to ask questions.',
         validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
     {
         type: 'input',
-        name: 'questions2',
+        name: 'github',
         message: 'Leave your github for people to ask questions.',
         validate: (value)=>{ if(value){return true} else {return 'i need a value to continue'}}
     },
@@ -78,12 +78,12 @@ inquirer
     },
 ])
 .then((data) =>
-fs.writeFile('README.md', template(data), (err) => {
+fs.writeFile('created-readme.md', template(data), (err) => {
     err ? console.log(err) : console.log('README was succesful!')
 })
 );
 
-const template = ({title, description, install, usage, credits, badges, features, contributers, test, questions1, questions2, license,}) =>
+const template = ({title, description, install, usage, credits, badges, features, contributers, test, github, email, license,}) =>
 `# ${title},
 
 ## Description
@@ -131,10 +131,10 @@ ${contributers},
 ${test},
 
 ## Questions
-
-${questions1},
-${questions2},
-
+If you have any questions feel free to reach me at
+Github Username: ${github},
+or
+Email: ${email},
 
 ## License
 
