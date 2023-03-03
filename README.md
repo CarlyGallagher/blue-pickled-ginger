@@ -17,9 +17,9 @@ So That I can quickly make a professional README.md through the command line usi
 ​![Alt text](utils/assets/terminalPrompts.png)
 
 ## Links
-Deployed Webpage: N/A
-GitHub Repo Page: https://github.com/CarlyGallagher/blue-pickled-ginger.git
-Castify Video Demo: https://drive.google.com/file/d/1CRk_2KKUcTv_PiUDYbIiSirFC04UJP5E/view
+- Deployed Webpage: N/A
+- GitHub Repo Page: https://github.com/CarlyGallagher/blue-pickled-ginger.git
+- Castify Video Demo: https://drive.google.com/file/d/1CRk_2KKUcTv_PiUDYbIiSirFC04UJP5E/view
 ​
 ## Credits
 ​
