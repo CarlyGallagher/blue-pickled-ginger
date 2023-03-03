@@ -82,10 +82,8 @@ ${description}
 - [Installation](#installation)
 - [Usage](#usage)
 - [Credits](#credits)
-- [Badges](#badges)
-- [Features](#features)
-- [Contributers](#contributers)
-- [Test](#test)
+- [Contribute](#contribute)
+- [Test](#Tests)
 - [Questions](#questions)
 - [License](#license)
 
