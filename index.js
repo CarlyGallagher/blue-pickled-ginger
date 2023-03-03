@@ -1,6 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const {renderLicenseBadge, renderLicenseText} = require('./utils/generateBadges')
 
+// these are the prompts that will show in the command line.
 inquirer
 .prompt([
     {
@@ -30,11 +32,6 @@ inquirer
     },
     {
         type: 'input',
-        name: 'badges',
-        message: 'What badges would you like displayed?',
-    },
-    {
-        type: 'input',
         name: 'contributers',
         message: 'What are the rules for future contributers?',
     },
@@ -57,18 +54,22 @@ inquirer
         type: 'list',
         name: 'license',
         message: 'What License did you use?',
-        choices: ['the MIT License', 'The GPL License', 'apache License', 'GNU license', 'N/A', ] , 
+        choices: ['MIT License', 'IBM license', 'apache license', 'GNU license', 'N/A', ] , 
     },
 ])
-.then((data) =>
-fs.writeFile('README.md', template(data), (err) => {
+// this calls our functions to render the license info and badge along with creating the README.md
+.then((data) => {
+data.badge = renderLicenseBadge(data.license), 
+data.licenseText = renderLicenseText(data.license),
+fs.writeFile('DEMO-README.md', template(data), (err) => {
     err ? console.log(err) : console.log('README was succesful!')
 })
-);
+});
 
-const template = ({title, description, install, usage, credits, badges, contributers, test, github, email, license,}) =>
+// this is our template literal where the answers in the questions will fill it out
+const template = ({title, description, install, usage, credits, badge, contributers, test, github, email, license, licenseText}) =>
 `
-${badges}
+${badge}
 
 # ${title}
 
@@ -122,6 +123,7 @@ Email me at:
 
 ## License
 
-${license}`;
+${license}
+${licenseText}`;
 
 
